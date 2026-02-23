@@ -172,3 +172,75 @@ function handleDelete(event) {
     job => job.companyName !== companyName || job.position !== position
   );
 }
+
+
+function getStatusClass(status) {
+  return status === "INTERVIEW"
+    ? "jobStatus px-3 py-2 text-[14px] rounded border bg-green-100 text-green-500 border-green-400 font-[600]"
+    : "jobStatus px-3 py-2 text-[14px] rounded border bg-red-100 text-red-500 border-red-400 font-[600]";
+}
+
+// =====================
+// Part 9: Render Jobs (Reusable)
+// =====================
+
+function renderJobs(jobList) {
+
+  filterSection.innerHTML = "";
+
+  if (jobList.length === 0) {
+    noJobAvailable.classList.remove("hidden");
+    return;
+  } else {
+    noJobAvailable.classList.add("hidden");
+  }
+
+  for (let job of jobList) {
+
+    let div = document.createElement("div");
+    div.className =
+      "cardSection flex flex-col gap-10 md:flex-row justify-between bg-base-100 p-6 rounded-lg mb-5 mt-7 cardContainer";
+
+    div.innerHTML = `
+      <div>
+        <h2 class="companyName text-[#002C5C] text-[18px] font-semibold">
+          ${job.companyName}
+        </h2>
+        <p class="position text-[16px] text-gray-500">
+          ${job.position}
+        </p>
+
+        <div class="text-gray-500 my-5 flex flex-col gap-4 md:flex-row md:gap-2">
+          <p class="location">${job.location}</p>
+          <p class="type">${job.type}</p>
+          <p class="salary">${job.salary}</p>
+        </div>
+
+        <div>
+          <span class="${getStatusClass(job.jobStatus)}">
+            ${job.jobStatus}
+          </span>
+        </div>
+
+        <p class="description text-[#323B49] text-[14px] mt-3">
+          ${job.description}
+        </p>
+
+        <div class="mt-5 flex gap-2">
+          <button class="btn btn-sm btn-outline btn-success">INTERVIEW</button>
+          <button class="btn btn-sm btn-outline btn-error">REJECTED</button>
+        </div>
+      </div>
+
+      <div>
+        <button class="btn rounded-full">
+          <img src="./image/Trash.png" alt="" />
+        </button>
+      </div>
+    `;
+
+    filterSection.appendChild(div);
+  }
+}
+
+calculateCount();
