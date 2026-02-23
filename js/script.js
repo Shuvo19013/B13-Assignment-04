@@ -45,3 +45,59 @@ function tabJobCount() {
     countElement.innerText = rejectedList.length + " of " + totalJobs + " jobs";
   }
 }
+
+
+
+function toggleStyle(id) {
+
+  // Reset all buttons
+  [allTabBtn, interviewTabBtn, rejectedTabBtn].forEach(btn => {
+    btn.classList.add("bg-base-100", "text-gray-500");
+    btn.classList.remove("bg-[#3B82F6]", "text-white");
+  });
+
+  // Activate selected button
+  const selected = document.getElementById(id);
+  selected.classList.remove("bg-base-100", "text-gray-500");
+  selected.classList.add("bg-[#3B82F6]", "text-white");
+
+  // Show/Hide sections
+  if (id === "all-filter-btn") {
+    allCardSection.classList.remove("hidden");
+    filterSection.classList.add("hidden");
+    noJobAvailable.classList.add("hidden");
+  } 
+  else if (id === "interview-filter-btn") {
+    allCardSection.classList.add("hidden");
+    filterSection.classList.remove("hidden");
+    renderJobs(interviewList);
+  } 
+  else if (id === "rejected-filter-btn") {
+    allCardSection.classList.add("hidden");
+    filterSection.classList.remove("hidden");
+    renderJobs(rejectedList);
+  }
+
+  tabJobCount();
+}
+
+
+
+mainContainer.addEventListener("click", function (event) {
+
+  
+  if (event.target.classList.contains("btn-success")) {
+    handleJobAction(event, "INTERVIEW");
+  }
+
+  else if (event.target.classList.contains("btn-error")) {
+    handleJobAction(event, "REJECTED");
+  }
+
+  
+  else if (event.target.closest(".btn.rounded-full")) {
+    handleDelete(event);
+  }
+
+  calculateCount();
+});
