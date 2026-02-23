@@ -55,5 +55,43 @@
         </div>
       </div>
     </header>
+    <hr class="w-[95%] sm:w-[90%] md:w-[80%] mx-auto text-[#E6E7E9] mt-7" />
+
+    <main class="w-[95%] sm:w-[90%] md:w-[80%] mx-auto">
+      <section>
+        <div class="flex justify-between items-center mt-[30px]">
+          <h2 class="text-xl text-[#002C5C] font-semibold">Available Jobs</h2>
+          <p class="text-[16px] text-gray-500">0</p>
+        </div>
+
+        <div class="flex flex-wrap justify-center md:justify-start gap-2 pt-6">
+          <button
+            onclick="toggleStyle('all-filter-btn')"
+            class="bg-[#3B82F6] text-white px-8 py-2"
+            id="all-filter-btn"
+          >
+            All
+          </button>
+          <button
+            onclick="toggleStyle('interview-filter-btn')"
+            class="bg-base-100 px-8 py-2 text-gray-500"
+            id="interview-filter-btn"
+          >
+            Interview
+          </button>
+          <button
+            onclick="toggleStyle('rejected-filter-btn')"
+            class="bg-base-100 px-8 py-2 text-gray-500"
+            id="rejected-filter-btn"
+          >
+            Rejected
+          </button>
+        </div>
+      </section>
+      <!-- Filtered card -->
+
+      <section id="filtered-section" class="hidden"></section>
+
+      <section id="allCards" class="pt-[30px] space-y-4">
 </body>
 </html>
